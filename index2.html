@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mimimiau.cl | Carcasas Decoden Kawaii Hechas a Mano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuración de Tailwind: agrega colores y tipografías propios para reutilizarlos en las clases de la página. -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pastelPink: '#FFD6E8',
+                        pastelPinkDark: '#FF94C2',
+                        pastelPurple: '#E8D5C4',
+                        pastelLavender: '#E8D7F6',
+                        pastelMint: '#D4F0F0',
+                        pastelCream: '#FFF9F5',
+                        pastelYellow: '#FFF1C5',
+                        brandDark: '#5E4B56'
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        quicksand: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #FFF9F5;
+            color: #5E4B56;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-heading {
+            font-family: 'Fredoka', cursive;
+        }
+
+        /* Fondo con puntos pastel que da textura a toda la página. */
+        .cream-bg {
+            background-color: #FFF9F5;
+            background-image: radial-gradient(#FFD6E8 1.5px, transparent 1.5px), radial-gradient(#E8D7F6 1.5px, #FFF9F5 1.5px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+        }
+
+        /* Fondos para crear bordes decorativos ondulados; se aplican solo a elementos que usen estas clases. */
+        .scallop-bottom {
+            background: radial-gradient(circle at 10px -5px, transparent 12px, #FFD6E8 13px);
+            background-size: 20px 20px;
+        }
+
+        .scallop-top {
+            background: radial-gradient(circle at 10px 15px, #FFD6E8 12px, transparent 13px);
+            background-size: 20px 20px;
+        }
+
+        /* Personaliza la barra de desplazamiento en navegadores compatibles con estos selectores. */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FFF9F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB3D9;
+            border-radius: 20px;
+            border: 2px solid #FFF9F5;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF94C2;
+        }
+
+        /* Animación de flotación para adornos: sube y gira levemente sin afectar el flujo del contenido. */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 5s ease-in-out 1.5s infinite;
+        }
+
+        /* Animación de pulso suave para destacar elementos mediante un cambio de escala. */
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 3s ease-in-out infinite;
+        }
+
+        /* Transición y elevación de las tarjetas cuando el cursor pasa sobre ellas. */
+        .decoden-card {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .decoden-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(255, 148, 194, 0.25), 0 10px 10px -5px rgba(232, 215, 246, 0.2);
+        }
+
+        /* Panel translúcido con desenfoque y borde; el efecto depende del soporte de backdrop-filter. */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 214, 232, 0.6);
+        }
+    </style>
+</head>
+<body class="cream-bg min-h-screen flex flex-col justify-between selection:bg-pastelPink selection:text-brandDark">
+
+    <!-- Franja superior: comunica envíos y personalización antes de que la persona navegue por el catálogo. -->
+    <div class="bg-gradient-to-r from-pastelPink via-pastelLavender to-pastelMint text-brandDark text-xs md:text-sm py-2 px-4 text-center font-medium shadow-sm">
+        <span class="inline-block animate-pulse mr-1">✨</span> ¡Envíos a todo Chile! Carcasas para celular personalizadas con crema batida Decoden <span class="inline-block animate-pulse ml-1">🎀</span>
+    </div>
+
+    <!-- Encabezado fijo: mantiene a mano el logo, la navegación y los accesos de contacto al desplazarse. -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b-4 border-pastelPink transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Marca: al pulsarla, vuelve al inicio de la página. -->
+                <a href="#inicio" class="flex flex-col items-start group">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl sm:text-3xl font-bold font-heading text-brandDark tracking-wide group-hover:text-pastelPinkDark transition-colors">
+                            Mimimiau<span class="text-pastelPinkDark">.cl</span>
+                        </span>
+                        <i class="fa-solid font-bold fa-cat text-pastelPinkDark text-xl group-hover:rotate-12 transition-transform"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-semibold text-brandDark/70 tracking-widest uppercase -mt-1 pl-0.5">
+                        Decoden Chile
+                    </span>
+                </a>
+
+                <!-- Navegación de escritorio; sus enlaces apuntan a las secciones identificadas con esos mismos anclajes. -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#inicio" class="px-3 py-2 rounded-full text-brandDark font-medium hover:bg-pastelPink/50 transition-colors">Inicio</a>
+                    <a href="#catalogo" class="px-3 py-2 rounded-full text-brandDark font-medium hover:bg-pastelPink/50 transition-colors">Catálogo</a>
+                    <a href="#galeria" class="px-3 py-2 rounded-full text-brandDark font-medium hover:bg-pastelPink/50 transition-colors">Galería</a>
+                    <a href="#nosotros" class="px-3 py-2 rounded-full text-brandDark font-medium hover:bg-pastelPink/50 transition-colors">Sobre Decoden</a>
+                    <a href="#faq" class="px-3 py-2 rounded-full text-brandDark font-medium hover:bg-pastelPink/50 transition-colors">Preguntas</a>
+                </nav>
+
+                <!-- Acciones del encabezado: contador visual de favoritos/pedido y acceso a cotización por WhatsApp. -->
+                <div class="flex items-center gap-3">
+                    <button id="cart-toggle-btn" class="relative p-2.5 rounded-full bg-pastelPink/40 text-brandDark hover:bg-pastelPink transition-all" title="Ver pedido personalizado">
+                        <i class="fa-solid fa-heart text-xl text-pastelPinkDark"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-pastelPinkDark text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                    </button>
+
+                    <a href="https://wa.me/56965829552?text=Hola%20Mimimiau.cl,%20quisiera%20consultar%20por%20sus%20productos%20Decoden" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-2 px-4 rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span class="text-sm">Cotizar</span>
+                    </a>
+
+                    <!-- Este botón solo aparece en pantallas pequeñas y muestra u oculta el menú móvil con JavaScript. -->
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-brandDark hover:bg-pastelPink/30 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú móvil: permanece oculto inicialmente y se despliega al pulsar el botón anterior. -->
+        <div id="mobile-menu" class="hidden md:hidden bg-pastelCream border-t border-pastelPink px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <a href="#inicio" class="block px-3 py-2 rounded-xl font-medium text-brandDark hover:bg-pastelPink/40">Inicio</a>
+            <a href="#catalogo" class="block px-3 py-2 rounded-xl font-medium text-brandDark hover:bg-pastelPink/40">Catálogo Decoden</a>
+            <a href="#galeria" class="block px-3 py-2 rounded-xl font-medium text-brandDark hover:bg-pastelPink/40">Galería de Trabajos</a>
+            <a href="#nosotros" class="block px-3 py-2 rounded-xl font-medium text-brandDark hover:bg-pastelPink/40">Sobre Decoden</a>
+            <a href="#faq" class="block px-3 py-2 rounded-xl font-medium text-brandDark hover:bg-pastelPink/40">Preguntas Frecuentes</a>
+            <a href="https://wa.me/56965829552?text=Hola%20Mimimiau.cl,%20quisiera%20consultar%20por%20sus%20productos%20Decoden" target="_blank" class="flex items-center justify-center gap-2 bg-emerald-400 text-white font-bold py-2.5 rounded-xl shadow-md w-full mt-2">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                <span>Contacto Directo WhatsApp</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Portada: presenta la propuesta de la tienda y dirige al catálogo o al contacto por WhatsApp. -->
+    <section id="inicio" class="relative overflow-hidden py-12 lg:py-20">
+        <!-- Adornos flotantes: son decorativos y pointer-events-none evita que interfieran con los clics. -->
+        <div class="absolute top-10 left-5 md:left-20 animate-float opacity-70 pointer-events-none">
+            <span class="text-4xl">🍓</span>
+        </div>
+        <div class="absolute bottom-10 left-10 md:left-32 animate-float-delayed opacity-70 pointer-events-none">
+            <span class="text-4xl">🎀</span>
+        </div>
+        <div class="absolute top-12 right-8 md:right-28 animate-float opacity-70 pointer-events-none">
+            <span class="text-4xl">✨</span>
+        </div>
+        <div class="absolute bottom-12 right-12 md:right-36 animate-float-delayed opacity-70 pointer-events-none">
+            <span class="text-4xl">🧸</span>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Texto principal, promesas de valor y llamadas a la acción de la portada. -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-white/80 border-2 border-pastelPink rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold text-brandDark shadow-sm">
+                        <span class="bg-pastelPinkDark text-white text-xs px-2 py-0.5 rounded-full uppercase tracking-wider">100% Handmade</span>
+                        <span>Arte Decoden en Chile 🇨🇱</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading text-brandDark leading-tight">
+                        Tu celular se convierte en una <span class="bg-gradient-to-r from-pastelPinkDark via-purple-400 to-pink-400 bg-clip-text text-transparent">carcasa Decoden única</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-brandDark/80 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        En <strong class="text-brandDark">Mimimiau.cl</strong> decoramos carcasas para celular a mano con crema batida Decoden y dijes. Personalizamos los colores y detalles para crear una funda única para ti.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="#catalogo" class="w-full sm:w-auto text-center bg-pastelPinkDark hover:bg-pink-500 text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg hover:shadow-pink-200 hover:-translate-y-1 transition-all">
+                            <i class="fa-solid fa-sparkles mr-2"></i> Ver Catálogo
+                        </a>
+                        <a href="https://wa.me/56965829552?text=Hola%20Mimimiau.cl,%20quisiera%20cotizar%20una%20carcasa%20Decoden%20personalizada" target="_blank" class="w-full sm:w-auto text-center bg-white hover:bg-pastelCream text-brandDark border-2 border-pastelPink font-bold text-lg px-8 py-4 rounded-full shadow-md hover:shadow-lg hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-500 text-xl"></i> Diseño Personalizado
+                        </a>
+                    </div>
+
+                    <!-- Indicadores breves sobre personalización, resistencia y cobertura de envíos. -->
+                    <div class="pt-6 grid grid-cols-3 gap-2 sm:gap-4 border-t border-pastelPink/50 max-w-lg mx-auto lg:mx-0">
+                        <div class="text-center lg:text-left">
+                            <span class="block text-xl font-bold text-pastelPinkDark font-heading">Carcasas Únicas</span>
+                            <span class="text-xs text-brandDark/70">Diseñadas a tu estilo</span>
+                        </div>
+                        <div class="text-center lg:text-left border-x border-pastelPink/50 px-2">
+                            <span class="block text-xl font-bold text-pastelPinkDark font-heading">Hechas a Mano</span>
+                            <span class="text-xs text-brandDark/70">Cada detalle cuenta</span>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <span class="block text-xl font-bold text-pastelPinkDark font-heading">Envíos a Chile</span>
+                            <span class="text-xs text-brandDark/70">Starken, Chilexpress y Bluexpress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vista destacada del producto: combina imagen, precio y efectos decorativos de fondo. -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <!-- Manchas de color difuminadas para dar profundidad detrás de la tarjeta. -->
+                        <div class="absolute -top-6 -left-6 w-72 h-72 bg-pastelPink rounded-full filter blur-3xl opacity-70 animate-pulse"></div>
+                        <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-pastelLavender rounded-full filter blur-3xl opacity-70 animate-pulse"></div>
+
+                        <!-- Tarjeta de producto destacado; la imagen tiene una alternativa si no carga. -->
+                        <div class="relative bg-white border-4 border-pastelPink rounded-3xl p-5 shadow-2xl space-y-4">
+                            <div class="relative rounded-2xl overflow-hidden aspect-square bg-pastelCream flex items-center justify-center group">
+                                <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-2xl">
+                                    <source src="vidio_decoden.mp4" type="video/mp4">
+                                            Tu navegador no soporta videos HTML5.
+                                        </video
+                                     alt="Funda Decoden Kawaii Mimimiau" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                     onerror="this.src='https://placehold.co/600x600/FFD6E8/5E4B56?text=Mimimiau+Decoden+Case'">
+                                <div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-bold text-pastelPinkDark shadow-sm border border-pastelPink">
+                                    ★ Destacado
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-bold text-brandDark">Funda Sweet Strawberry Case</h3>
+                                    <p class="text-xs text-brandDark/70">Crema rosada con dijes de resina y perlas</p>
+                                </div>
+                                <span class="text-lg font-bold font-heading text-pastelPinkDark bg-pastelPink/30 px-3 py-1 rounded-full">$18.990</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo: agrupa productos y controles para filtrar por categoría sin recargar la página. -->
+    <section id="catalogo" class="py-16 bg-white/60 backdrop-blur-sm border-y-2 border-pastelPink/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-10">
+                <span class="text-pastelPinkDark font-bold text-sm tracking-widest uppercase bg-pastelPink/30 px-4 py-1 rounded-full">Carcasas Hechas a Mano</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brandDark font-heading">Carcasas Decoden para tu celular</h2>
+                <p class="text-brandDark/70 text-sm sm:text-base">Decoramos carcasas con crema batida y dijes. Cuéntanos el modelo de tu teléfono y conversemos sobre tu diseño personalizado.</p>
+            </div>
+
+            <!-- Se muestra únicamente el modelo de carcasa Decoden disponible en este catálogo. -->
+            <div class="grid grid-cols-1 gap-6 sm:gap-8 max-w-sm mx-auto" id="product-grid">
+                
+                <!-- Producto 1: la clase "cases" determina su categoría; los botones abren detalles o lo agregan al contador. -->
+                <div class="product-item cases decoden-card bg-white border-2 border-pastelPink rounded-3xl overflow-hidden shadow-sm hover:shadow-xl flex flex-col justify-between">
+                    <div>
+                        <div class="relative overflow-hidden aspect-square bg-pastelCream">
+                            <img src="carcasa_4.jpg" alt="Funda Berry Cream" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-pastelPinkDark text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">Diseño Decoden</span>
+                            <button onclick="addToFavorites('Funda Berry Whipped', '$18.990')" class="absolute top-3 right-3 bg-white/80 hover:bg-white text-pastelPinkDark p-2 rounded-full shadow transition-all">
+                                <i class="fa-regular fa-heart text-lg"></i>
+                            </button>
+                        </div>
+                        <div class="p-5 space-y-2">
+                            <span class="text-xs font-semibold text-pastelPinkDark tracking-wider uppercase">Carcasa para celular</span>
+                            <h3 class="text-lg font-bold text-brandDark">Funda Berry Whipped</h3>
+                            <p class="text-xs text-brandDark/70 line-clamp-2">Base de crema pastel rosada, dijes de fresas en resina y lluvia de chocochips de colores.</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-pastelPink/30 mt-2">
+                        <span class="text-xl font-bold font-heading text-brandDark">$18.990</span>
+                        <button onclick="openProductModal('Funda Berry Whipped', '$18.990', 'Funda Celular', 'Base de crema pastel rosada, dijes de fresas en resina, Osito central y lluvia de chocochips. Se adapta a cualquier modelo de iPhone, Samsung, Xiaomi o Motorola.', 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=600&q=80')" class="bg-pastelPink hover:bg-pastelPinkDark hover:text-white text-brandDark font-bold text-xs px-3.5 py-2 rounded-full transition-colors">
+                            Detalles
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Llamada a la acción para iniciar por WhatsApp un pedido diseñado desde cero. -->
+            <div class="mt-12 bg-gradient-to-r from-pastelPink/60 via-pastelLavender/60 to-pastelMint/60 border-2 border-white rounded-3xl p-6 sm:p-10 text-center shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="text-left space-y-2 max-w-xl">
+                    <h3 class="text-2xl font-bold font-heading text-brandDark">¿Quieres una carcasa con tu propio estilo? 🎨</h3>
+                    <p class="text-sm text-brandDark/80">Cuéntanos el modelo de tu teléfono y los colores o dijes que te gustaría incluir en tu diseño Decoden.</p>
+                </div>
+                <a href="https://wa.me/56965829552?text=Hola%20Mimimiau.cl,%20quisiera%20cotizar%20una%20carcasa%20Decoden%20para%20mi%20modelo%20de%20celular" target="_blank" class="whitespace-nowrap bg-brandDark hover:bg-black text-white font-bold px-6 py-3.5 rounded-full shadow-md hover:shadow-xl transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-pastelPink"></i> Cotizar mi carcasa
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Galería: muestra ejemplos visuales; al pasar el cursor aparecen etiquetas sobre cada imagen. -->
+    <section id="galeria" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-pastelPinkDark font-bold text-sm tracking-widest uppercase bg-pastelPink/30 px-4 py-1 rounded-full">Inspiración</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-brandDark font-heading mt-2">Galería de Diseños Mimimiau</h2>
+                <p class="text-brandDark/70 text-sm">Un vistazo de cerca a detalles, texturas y pedidos entregados a nuestros clientes felices en todo Chile.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="relative group overflow-hidden rounded-2xl aspect-square border-2 border-pastelPink shadow-sm">
+                    <img src="pasta.jpg" alt="Galería Decoden 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brandDark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm">
+                        <span>✨ Detalles en Resina</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl aspect-square border-2 border-pastelPink shadow-sm">
+                    <img src="dijes_todo.jpg" alt="Galería Decoden 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brandDark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm">
+                        <span>🎀 Textura Batida</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl aspect-square border-2 border-pastelPink shadow-sm">
+                    <img src="carcasa_2.jpg" alt="Galería Decoden 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brandDark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm">
+                        <span>🌸 Tonos Pasteles</span>
+                    </div>
+                </div>
+                <div class="relative group overflow-hidden rounded-2xl aspect-square border-2 border-pastelPink shadow-sm">
+                    <img src="carcasa_3.jpg" alt="Galería Decoden 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-brandDark/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm">
+                        <span>👑 Espejos Coquetos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección informativa: explica qué es Decoden y presenta el proceso artesanal de la tienda. -->
+    <section id="nosotros" class="py-16 bg-gradient-to-b from-white to-pastelCream border-t-2 border-pastelPink/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="text-pastelPinkDark font-bold text-sm tracking-widest uppercase bg-pastelPink/30 px-4 py-1 rounded-full">¿Qué es el Decoden?</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-brandDark font-heading leading-tight">
+                        El arte del "Deco-Denwa" directo desde Japón a tus manos
+                    </h2>
+                    <p class="text-brandDark/80 leading-relaxed">
+                        El término <strong>Decoden (デコ電)</strong> proviene de la combinación de *Decoration* (decoración) y *Denwa* (teléfono en japonés). Es la tendencia de personalizar artículos cotidianos con crema simulada y accesorios tridimensionales.
+                    </p>
+                    <p class="text-brandDark/80 leading-relaxed">
+                        En <strong>Mimimiau.cl</strong> llevamos esta pasión artesanal con dedicación en Chile. Cada diseño requiere un proceso cuidadoso de secado de 24 a 48 horas para garantizar que tu funda o accesorio quede firme, duradero y extra suave al tacto.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 bg-white rounded-2xl border border-pastelPink shadow-sm flex items-start gap-3">
+                            <span class="text-2xl">🍰</span>
+                            <div>
+                                <h4 class="font-bold text-brandDark text-sm">Crema de Calidad</h4>
+                                <p class="text-xs text-brandDark/70">Silicona y pasta especial no tóxica y súper resistente.</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white rounded-2xl border border-pastelPink shadow-sm flex items-start gap-3">
+                            <span class="text-2xl">💖</span>
+                            <div>
+                                <h4 class="font-bold text-brandDark text-sm">Hecho con Amor</h4>
+                                <p class="text-xs text-brandDark/70">Diseños minuciosos pensados para alegrar tus días.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="relative p-3 bg-white border-4 border-pastelLavender rounded-3xl shadow-xl max-w-md w-full">
+                        <img src="carcasa_1.jpg" alt="Proceso Artesanal Decoden" class="w-full h-auto rounded-2xl object-cover">
+                        <div class="absolute -bottom-5 -left-5 bg-white border-2 border-pastelPink p-4 rounded-2xl shadow-lg flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center text-pastelPinkDark font-bold">
+                                🐾
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-brandDark">Proceso 100% Artesanal</p>
+                                <p class="text-[10px] text-brandDark/70">Creado en nuestro espacio en Talca, Chile</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Preguntas frecuentes: cada elemento details/summary se expande o contrae usando HTML nativo. -->
+    <section id="faq" class="py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold font-heading text-brandDark">Preguntas Frecuentes</h2>
+                <p class="text-brandDark/70 text-sm mt-1">Resolvemos tus dudas antes de encargar tu accesorio soñado.</p>
+            </div>
+
+            <div class="space-y-4">
+                <details class="group bg-white border-2 border-pastelPink rounded-2xl p-4 transition-all [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between font-bold text-brandDark cursor-pointer">
+                        <span>¿La crema Decoden se junta o se cae fácilmente?</span>
+                        <span class="transition group-open:rotate-180 text-pastelPinkDark">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-3 text-sm text-brandDark/80 leading-relaxed border-t border-pastelPink/30 pt-3">
+                        ¡No! Usamos fórmulas de pasta y silicona de alta calidad que curan completamente de forma flexible y sólida. Es muy duradera con el uso cotidiano.
+                    </p>
+                </details>
+
+                <details class="group bg-white border-2 border-pastelPink rounded-2xl p-4 transition-all [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between font-bold text-brandDark cursor-pointer">
+                        <span>¿Cuánto tiempo tarda en prepararse un pedido?</span>
+                        <span class="transition group-open:rotate-180 text-pastelPinkDark">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-3 text-sm text-brandDark/80 leading-relaxed border-t border-pastelPink/30 pt-3">
+                        Al ser un producto personalizado y moldeado manualmente, el proceso de confección y secado toma entre 3 a 5 días hábiles antes de realizar el envío.
+                    </p>
+                </details>
+
+                <details class="group bg-white border-2 border-pastelPink rounded-2xl p-4 transition-all [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between font-bold text-brandDark cursor-pointer">
+                        <span>¿Cómo hago el pedido para mi modelo específico de teléfono?</span>
+                        <span class="transition group-open:rotate-180 text-pastelPinkDark">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-3 text-sm text-brandDark/80 leading-relaxed border-t border-pastelPink/30 pt-3">
+                        Puedes presionar el botón de WhatsApp y escribirnos directamente indicando la marca y modelo exacto de tu celular (iPhone, Samsung, Motorola, etc.). Conseguimos la funda transparente base para ti.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página: reúne un mensaje de marca, navegación, contacto y enlaces a redes sociales. -->
+    <footer class="bg-gradient-to-b from-pastelCream via-pastelPink/30 to-pastelPink/60 pt-12 pb-8 border-t-4 border-pastelPink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Mensaje destacado de marca, separado visualmente del resto de la información del pie. -->
+            <div class="bg-white/90 border-2 border-pastelPink rounded-3xl p-8 text-center shadow-md max-w-3xl mx-auto mb-12 relative overflow-hidden">
+                <div class="absolute -top-6 -right-6 text-6xl opacity-20">💖</div>
+                <div class="absolute -bottom-6 -left-6 text-6xl opacity-20">✨</div>
+                
+                <span class="inline-block text-pastelPinkDark text-xl mb-2">✦ Message of Love ✦</span>
+                <p class="text-xl sm:text-2xl font-semibold text-brandDark font-heading italic leading-relaxed">
+                    "Eres única, brillante y mereces rodearte de cosas hermosas que reflejen la luz tan bonita que llevas dentro. Sonríe hoy y siempre. ✨"
+                </p>
+                <span class="block text-xs font-bold text-brandDark/60 tracking-widest uppercase mt-3">— Con amor, el equipo de Mimimiau.cl</span>
+            </div>
+
+            <!-- Columnas de información del pie; Tailwind las reorganiza según el ancho de pantalla. -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                
+                <!-- Descripción breve de la tienda y de sus productos. -->
+                <div class="space-y-3 md:col-span-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl font-bold font-heading text-brandDark">Mimimiau<span class="text-pastelPinkDark">.cl</span></span>
+                        <i class="fa-solid fa-cat text-pastelPinkDark text-lg"></i>
+                    </div>
+                    <span class="block text-xs font-bold text-brandDark/70 tracking-widest uppercase">Decoden Chile</span>
+                    <p class="text-xs text-brandDark/70 leading-relaxed">
+                        Tienda chilena especializada en personalización Decoden estilo Kawaii. Fundas de teléfonos con accesorios y detalles llenos de dulzura.
+                    </p>
+                </div>
+
+                <!-- Enlaces internos para volver rápidamente a las secciones principales. -->
+                <div>
+                    <h4 class="font-bold font-heading text-brandDark mb-3">Navegación</h4>
+                    <ul class="space-y-2 text-xs text-brandDark/80 font-medium">
+                        <li><a href="#inicio" class="hover:text-pastelPinkDark transition-colors">Inicio</a></li>
+                        <li><a href="#catalogo" class="hover:text-pastelPinkDark transition-colors">Catálogo Completo</a></li>
+                        <li><a href="#galeria" class="hover:text-pastelPinkDark transition-colors">Galería de Fotos</a></li>
+                        <li><a href="#nosotros" class="hover:text-pastelPinkDark transition-colors">¿Qué es Decoden?</a></li>
+                    </ul>
+                </div>
+
+                <!-- Datos de contacto visibles; editar aquí los datos también actualiza lo que ve la persona. -->
+                <div>
+                    <h4 class="font-bold font-heading text-brandDark mb-3">Contacto Directo</h4>
+                    <ul class="space-y-2 text-xs text-brandDark/80 font-medium">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-500"></i>
+                            <span>+56 9 6582 9552</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                    <!-- >   <i class="fa-regular fa-envelope text-pastelPinkDark"></i>
+                            <span>contacto@mimimiau.cl</span>
+                        </li> -->
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-pastelPinkDark"></i>
+                            <span>Talca, Chile (Envíos a todo el país)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Accesos externos a redes sociales. -->
+                <div>
+                    <h4 class="font-bold font-heading text-brandDark mb-3">Síguenos en Redes</h4>
+                    <p class="text-xs text-brandDark/70 mb-3">Mira nuestros trabajos y nuevos lanzamientos:</p>
+                    <div class="flex gap-3">
+                        <a href="https://www.instagram.com/mimimiau.cl?utm_source=ig_web_button_share_sheet&vrfl=ZDNlZDc0MzIxNw==" target="_blank" class="w-9 h-9 rounded-full bg-white border border-pastelPink text-pastelPinkDark flex items-center justify-center hover:bg-pastelPinkDark hover:text-white transition-all shadow-sm">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+                     <!--   <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-white border border-pastelPink text-pastelPinkDark flex items-center justify-center hover:bg-pastelPinkDark hover:text-white transition-all shadow-sm">
+                            <i class="fa-brands fa-tiktok text-lg"></i>
+                        </a> -->
+                        <a href="https://wa.me/56965829552" target="_blank" class="w-9 h-9 rounded-full bg-white border border-pastelPink text-emerald-500 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="border-t border-pastelPink/50 pt-6 text-center text-xs text-brandDark/60">
+                <p>&copy; 2026 Mimimiau.cl - Decoden Chile. Todos los derechos reservados. Diseñado con dulzura.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Acceso flotante a WhatsApp: queda fijo en pantalla y amplía su texto al pasar el cursor. -->
+    <a href="https://wa.me/56965829552?text=Hola%20Mimimiau.cl,%20quisiera%20consultar%20por%20una%20carcasa" 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-emerald-500 text-white p-4 rounded-full shadow-2xl hover:bg-emerald-600 hover:scale-110 transition-all flex items-center justify-center group"
+       title="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs group-hover:ml-2 transition-all duration-300 ease-in-out font-bold text-sm">
+            ¡Escríbenos! +56 9 6582 9552
+        </span>
+        <span class="absolute -top-1 -right-1 flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+        </span>
+    </a>
+
+    <!-- Ventana de detalles: JavaScript completa sus campos y el enlace de WhatsApp con el producto elegido. -->
+    <div id="product-modal" class="fixed inset-0 z-50 bg-brandDark/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white border-4 border-pastelPink rounded-3xl max-w-lg w-full p-6 relative shadow-2xl animate-pulse-soft">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 text-brandDark/60 hover:text-brandDark text-2xl font-bold">
+                &times;
+            </button>
+            <div class="space-y-4">
+                <div class="aspect-square rounded-2xl overflow-hidden bg-pastelCream">
+                    <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <span id="modal-category" class="text-xs font-bold text-pastelPinkDark uppercase tracking-wider"></span>
+                    <h3 id="modal-title" class="text-2xl font-bold font-heading text-brandDark"></h3>
+                    <p id="modal-price" class="text-xl font-bold text-pastelPinkDark mt-1"></p>
+                </div>
+                <p id="modal-desc" class="text-sm text-brandDark/80 leading-relaxed"></p>
+                
+                <div class="pt-2 flex gap-3">
+                    <a id="modal-wa-link" href="#" target="_blank" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-full text-center shadow transition-all flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Consultar por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interacciones de la página: menú móvil, filtro, contador visual de favoritos y ventana de producto. -->
+    <script>
+        // Alterna la clase "hidden" para desplegar o contraer el menú en dispositivos móviles.
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Guarda los controles y las tarjetas para aplicar el filtro sin volver a cargar la página.
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productItems = document.querySelectorAll('.product-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Actualiza los estilos para indicar cuál categoría está seleccionada.
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-pastelPinkDark', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-brandDark');
+                });
+                btn.classList.add('bg-pastelPinkDark', 'text-white', 'shadow-md');
+                btn.classList.remove('bg-white', 'text-brandDark');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                // Muestra todas las tarjetas o solo las que tienen la clase de la categoría elegida.
+                productItems.forEach(item => {
+                    if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Contador visual de favoritos: solo vive en memoria durante esta visita, no guarda datos ni crea un carrito.
+        let favoriteCount = 0;
+        function addToFavorites(name, price) {
+            favoriteCount++;
+            const counter = document.getElementById('cart-count');
+            counter.innerText = favoriteCount;
+            
+            // Crea un aviso temporal en pantalla para confirmar la acción y lo elimina después de unos segundos.
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-24 right-4 z-50 bg-pastelPinkDark text-white font-bold text-xs px-4 py-2.5 rounded-full shadow-lg transition-all transform translate-y-0';
+            toast.innerHTML = `💖 ¡Agregado "${name}" a tus favoritos!`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // Completa y abre la ventana de detalles con la información recibida desde la tarjeta del producto.
+        function openProductModal(title, price, category, desc, imgSrc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-price').innerText = price;
+            document.getElementById('modal-category').innerText = category;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-img').src = imgSrc;
+
+            // Codifica el texto para que el nombre y precio se incluyan correctamente en el enlace de WhatsApp.
+            const encodedMessage = encodeURIComponent(`Hola Mimimiau.cl, me interesa consultar disponiblidad y detalles del producto: ${title} (${price})`);
+            document.getElementById('modal-wa-link').href = `https://wa.me/56965829552?text=${encodedMessage}`;
+
+            // Quita "hidden" para mostrar la ventana sobre el resto de la página.
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        // Vuelve a ocultar la ventana de detalles.
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        // Cierra la ventana solo si el clic fue en el fondo oscuro, no dentro de la tarjeta de detalles.
+        document.getElementById('product-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'product-modal') {
+                closeProductModal();
+            }
+        });
+    </script>
+</body>
+</html>
